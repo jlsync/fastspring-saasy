@@ -57,6 +57,10 @@ module FastSpring
       self.class.post(renew_path, :basic_auth => @auth)
     end
 
+    def customer_url
+      value_for('customerUrl')
+    end
+
     private
 
     def parsed_response
