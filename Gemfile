@@ -1,11 +1,11 @@
-source :rubygems
+source "http://rubygems.org"
 
 gem 'httparty'
-gem 'rake'
+gem 'gyoku'
 
 group :development do
+  gem 'rake'
   gem 'bundler'
-  gem 'jeweler'
 end
 
 group :test do

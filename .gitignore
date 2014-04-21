@@ -1,3 +1,5 @@
+# generated gems
+*.gem
 # rcov generated
 coverage
 
@@ -15,6 +17,7 @@ doc
 pkg
 
 .rvmrc
+.rbenv-version
 
 # Have editor/IDE/OS specific files you need to ignore? Consider using a global gitignore: 
 #
@@ -29,7 +32,7 @@ pkg
 #
 # For MacOS:
 #
-#.DS_Store
+.DS_Store
 
 # For TextMate
 #*.tmproj

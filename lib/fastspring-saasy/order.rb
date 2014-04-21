@@ -1,10 +1,13 @@
 module FastSpring
-  class Order < Base
-    attr_reader :purchaser, :items
+  class Order < PrivateApiBase
     # Get the order from Saasy
     def find
-      @response = self.class.get(base_order_path, :basic_auth => @auth)
+      @response = self.class.get(base_order_path, :basic_auth => @auth, :ssl_ca_file => @ssl_ca_file)
       self
+    end
+
+    def build_from(response)
+      @response = response
     end
 
     def base_order_path
