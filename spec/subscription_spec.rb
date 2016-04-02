@@ -85,6 +85,11 @@ describe FastSpring::Subscription do
     it 'returns the end date' do
       subject.ends_on.should be_an_instance_of(Date)
     end
+    
+    it 'returns the tags as a symbolized hash' do
+      subject.tags[:number1].should == "1"
+      subject.tags[:number2].should == "2"
+    end
   end
 
   context 'create subscriptions path' do
@@ -102,6 +107,22 @@ describe FastSpring::Subscription do
 
     it 'returns a renewal path' do
       subject.renew_path.should == "/company/acme/subscription/test_ref/renew"
+    end
+  end
+
+  context 'update' do
+    subject { FastSpring::Subscription.find('test_ref') }
+
+    before do
+      stub_request(:get, "https://admin:test@api.fastspring.com/company/acme/subscription/test_ref").
+        to_return(stub_http_response_with('basic_subscription.xml'))
+      stub_request(:put, "https://admin:test@api.fastspring.com/company/acme/subscription/test_ref").
+        to_return(stub_http_response_with('basic_updated_subscription.xml', :put))
+    end
+
+    it "updates the subscription from given attributes" do
+      subject.update!(quantity: 12)
+      subject.quantity.should be(12)
     end
   end
 end
